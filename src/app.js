@@ -4,33 +4,34 @@ import "bootstrap";
 import "./style.css";
 
 window.onload = () => {
-  document.querySelector("#btn").addEventListener("click", () => {
-    document.querySelector("#domain-name").innerHTML = generateExcuse();
-  });
-};
-
-let generateExcuse = () => {
-  let pronoun = ["that", "the", "my", "our"];
+  let domain = [];
+  let pronoun = ["the", "our", "that", "your"];
   let adjective = [
-    "lustful",
+    "envious",
     "gluttonous",
     "greedy",
     "slothful",
     "wrathful",
-    "envious",
+    "lustful",
     "prideful"
   ];
   let noun = ["bear", "snake", "rabbit", "wolf", "eagle", "badger", "panther"];
-  let domain = [".com", ".biz", ".net", ".us", ".eu"];
+  let extensions = [".com", ".biz", ".net", ".us", ".eu"];
+  var htmlElement = document.getElementById("domain-list");
 
-  let pronounIndex = Math.floor(Math.random() * pronoun.length);
-  let adjectiveIndex = Math.floor(Math.random() * adjective.length);
-  let nounIndex = Math.floor(Math.random() * noun.length);
-  let domainIndex = Math.floor(Math.random() * domain.length);
-  return (
-    pronoun[pronounIndex] +
-    adjective[adjectiveIndex] +
-    noun[nounIndex] +
-    domain[domainIndex]
-  );
+  for (let i = 0; i < pronoun.length; i++) {
+    for (let j = 0; j < adjective.length; j++) {
+      for (let k = 0; k < noun.length; k++) {
+        for (let l = 0; l < extensions.length; l++) {
+          domain.push(
+            "www." + pronoun[i] + adjective[j] + noun[k] + extensions[l]
+          );
+        }
+      }
+    }
+  }
+  console.log(domain);
+  for (let i = 0; i < domain.length; i++) {
+    htmlElement.innerHTML += "<li>" + domain[i] + "</li>";
+  }
 };
